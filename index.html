@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
+    <script src="script.js" async></script>
     <title>Pierre, feuille, ciseaux</title>
 </head>
 <body>
+    <section class="bouttons">
+        <button id="pierre" value="Pierre">Feuille</button>
+        <button id="feuille" value="Feuille">Feuille</button>
+        <button id="ciseaux" value="Ciseaux">Ciseaux</button>
+    </section>
+    <div id="resultats">
+        <p>Joueur : <span class="score-joueur"></span></p>
+        <p>Ordinateur :<span class="score-ordi"></span></p>
+        <p class="manche"></p>
+        <button id="restart">Recommencer</button>
+    </div>
     
 </body>
 </html>

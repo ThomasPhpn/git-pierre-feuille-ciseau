@@ -1,9 +1,10 @@
 console.log("bonjour");
 let computerSelection;
 let playerSelection;
-let randomPlayerSelection;
 let playerCount = 0;
 let computerCount = 0;
+
+
 
 function getComputerChoice(){
     let randomNumber = Math.floor(Math.random() * 3);
@@ -23,8 +24,7 @@ function getComputerChoice(){
 
 function playRound(playerSelection, computerSelection){
     computerSelection = getComputerChoice();
-    randomPlayerSelection = prompt("Pierre, feuille, ou ciseaux ?");
-    playerSelection = randomPlayerSelection.charAt(0).toUpperCase() + randomPlayerSelection.slice(1);
+    playerSelection = ""
 
 
     if ((playerSelection == "Pierre" && computerSelection == "Ciseaux") || 
@@ -47,4 +47,6 @@ function game(){
     }
 }
 
-game();
+let btn2 = document.getElementById("feuille");
+let val2 = btn2.value;
+console.log(val2);
