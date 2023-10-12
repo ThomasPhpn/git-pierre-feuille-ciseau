@@ -1,52 +1,61 @@
-console.log("bonjour");
-let computerSelection;
-let playerSelection;
-let playerCount = 0;
-let computerCount = 0;
+// Get references to the three buttons and the result div
+const buttons = document.getElementsByClassName("myButton");
+const resultDiv = document.getElementById("result");
 
+// Initialize player scores
+let userScore = 0;
+let computerScore = 0;
 
+// Function to handle the game logic
+function playGame(userChoice) {
+    // Generate a random choice for the computer
+    const choices = ["Pierre", "Feuille", "Ciseaux"];
+    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
-function getComputerChoice(){
-    let randomNumber = Math.floor(Math.random() * 3);
-    let computerChoice;
-
-    if (randomNumber == 0) {
-        computerChoice = "Pierre";
-    } else if (randomNumber == 1) {
-        computerChoice = "Feuille"
-    } else{
-        computerChoice = "Ciseaux"
-    }
-
-    return computerChoice;
-} 
-
-
-function playRound(playerSelection, computerSelection){
-    computerSelection = getComputerChoice();
-    playerSelection = ""
-
-
-    if ((playerSelection == "Pierre" && computerSelection == "Ciseaux") || 
-        (playerSelection == "Feuille" && computerSelection == "Pierre") || 
-        (playerSelection == "Ciseaux" && computerSelection == "Feuille")) {
-        playerCount ++;    
-        return 'Bravo, ' + playerSelection + " bat " + computerSelection
-    } else if (playerSelection == computerSelection) {
-        computerCount ++;
-        return 'match nul, ' + playerSelection + " est sorti 2 fois!"
+    // Determine the result of the game
+    let result;
+    if (userChoice === computerChoice) {
+        result = "It's a tie!";
+    } else if (
+        (userChoice === "Pierre" && computerChoice === "Ciseaux") ||
+        (userChoice === "Feuille" && computerChoice === "Pierre") ||
+        (userChoice === "Ciseaux" && computerChoice === "Feuille")
+    ) {
+        result = "You win!";
+        userScore++;
     } else {
-        return 'Aïe, ' + playerSelection + " est battu par " + computerSelection
+        result = "Computer wins!";
+        computerScore++;
+    }
+
+    // Display the results
+    resultDiv.textContent = `You chose ${userChoice}, and the computer chose ${computerChoice}. ${result}`;
+
+    // Check for a winner
+    if (userScore === 3) {
+        resultDiv.textContent = "Congratulations! You win the game!";
+        disableButtons();
+    } else if (computerScore === 3) {
+        resultDiv.textContent = "Computer wins the game. Try again!";
+        disableButtons();
     }
 }
 
-function game(){
-    while ((playerCount != 5) || (computerCount != 5)) {
-        playRound();
-        console.log("Score joueur = " + playerCount + " et score ordinateur = " + computerCount);
+// Function to disable buttons after the game is over
+function disableButtons() {
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
     }
 }
 
-let btn2 = document.getElementById("feuille");
-let val2 = btn2.value;
-console.log(val2);
+// Add click event listeners to each button
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function(event) {
+        const userChoice = event.target.value;
+        playGame(userChoice);
+    });
+}
+
+
+
+
